@@ -3,7 +3,7 @@ A handful of scripts that make my life easier.
 
 Some of them are written in PowerShell, and others are in Python.
 
-## [Instalattion Script](script-instalacao.ps1)
+## [Instalattion Script](script-intalacao.ps1)
 After every new installation on a new computer, we need to install a specific set of apps which are located on a designated network path, which is already mapped before execution.
 
 _Uses PowerShell._
