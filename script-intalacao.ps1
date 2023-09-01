@@ -1,40 +1,30 @@
-$local_instaladores = "Z:\Publica\TI\"
+Set-Location \\192.168.1.1\Trabalho\Publica\TI
+$local_instaladores = "T:\Publica\TI\"
 $local_antivirus = $local_instaladores+"Nova pasta\Thor Antivirus\"
 $local_openvpn = $local_instaladores+"OVPN - Uniben Park Sul (nova)\"
 # Set-ExecutionPolicy RemoteSigned
- 
-Echo GoogleChrome
-Start-Process -Wait -FilePath $local_instaladores"ChromeSetup.exe" -ArgumentList "/S" -PassThru
-if ($?) {Echo "`r`n Chrome instalado com sucesso."}
 
-Echo Anydesk
-Start-Process -Wait -FilePath $local_instaladores"AnyDesk.exe" -ArgumentList "/S" -PassThru
-if ($?) {Echo "`r`n Anydesk instalado com sucesso."}
+function Install-Exe([string]$local,[string]$executavel, [string]$programa) {
+    Write-Host "[INSTALANDO] $programa" -BackgroundColor Black -ForegroundColor White
+    
+    Start-Process -Wait -FilePath $local$executavel -ArgumentList "/install" -PassThru
+    #& $local$executavel /install
+    if ($?) {
+        Write-Host "[Instalado com sucesso]" -BackgroundColor Green -ForegroundColor Black
+    } else {
+        Write-Host "[Falha na instalacao]" -BackgroundColor Red -ForegroundColor Black
+    }
+}
 
-Echo MicrosoftTeams
-Start-Process -Wait -FilePath $local_instaladores"TeamsSetup_c_w_.exe" -ArgumentList "/S" -PassThru
-if ($?) {Echo "`r`n Microsoft Teams instalado com sucesso."}
+Install-Exe $local_instaladores ChromeSetup.exe "Google Chrome"
+Install-Exe $local_instaladores Anydesk.exe "Anydesk"
+Install-Exe $local_instaladores TeamsSetup_c_w_.exe "Microsoft Teams"
+Install-Exe $local_instaladores OfficeSetup.exe "Microsoft Office"
+Install-Exe $local_instaladores PBIDesktopSetup_x64.exe "Power BI Desktop"
+Install-Exe $local_openvpn openvpn-install-2.4.6-I602.exe "OpenVPN"
+Install-Exe $local_antivirus HeimdalLatestVersion.exe "Antivirus"
+Install-Exe $local_instaladores Firebird-3.0.4.33054_0_x64.exe "Firebird"
 
-Echo MicrosoftTeams
-Start-Process -Wait -FilePath $local_instaladores"OfficeSetup.exe" -ArgumentList "/S" -PassThru
-if ($?) {Echo "`r`n Office instalado com sucesso."}
-
-Echo PowerBIDesktop
-Start-Process -Wait -FilePath $local_instaladores"PBIDesktopSetup_x64.exe" -ArgumentList "/S" -PassThru
-if ($?) {Echo "`r`n Power BI Desktop instalado com sucesso."}
-
-Echo OpenVPN
-Start-Process -Wait -FilePath $local_openvpn"openvpn-install-2.4.6-I602.exe" -ArgumentList "/S" -PassThru
-if ($?) {Echo "`r`n OpenVPN instalado com sucesso."}
-
-Echo antivirus
-Start-Process -Wait -FilePath $local_antivirus"HeimdalLatestVersion.exe"  -ArgumentList "/S" -PassThru
-if ($?) {Echo "`r`n Antivirus instalado com sucesso."}
-
-
-Echo firebird
-Start-Process -Wait -FilePath $local_instaladores"Firebird-3.0.4.33054_0_x64.exe" -ArgumentList "/S" -PassThru
-if ($?) {Echo "`r`n Power BI Desktop instalado com sucesso."}
 
 # permissionamento impede c�pia
 # Echo "Configurando Open VPN"
