@@ -11,7 +11,7 @@ with open(input_filename, 'r') as input_file:
     total_lines = len(lines)
 
     while line <= total_lines:
-        if i == 0 or i == line_limit or line == total_lines:
+        if i == line_limit or line == total_lines:
             file_number += 1
             filename = f"{output_filename_pattern}{file_number}.csv"
             with open(filename, 'w') as output_file:
